@@ -37,20 +37,20 @@ public class SalesRequest {
         this.moneyEntity = moneyEntity;
     }
 
-    public CardEntity getCardEntity() {
-        return cardEntity;
-    }
-
-    public void setCardEntity(CardEntity cardEntity) {
-        this.cardEntity = cardEntity;
-    }
-
     public String getRecurrenceFlag() {
         return recurrenceFlag;
     }
 
     public void setRecurrenceFlag(String recurrenceFlag) {
         this.recurrenceFlag = recurrenceFlag;
+    }
+
+    public CardEntity getCardEntity() {
+        return cardEntity;
+    }
+
+    public void setCardEntity(CardEntity cardEntity) {
+        this.cardEntity = cardEntity;
     }
 
     public AcceptorDetails getAcceptorDetails() {

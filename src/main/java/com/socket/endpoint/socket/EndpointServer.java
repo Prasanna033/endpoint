@@ -48,8 +48,12 @@ public class EndpointServer {
                 SalesPostResponse response =
                         messageService.processRequest(salesRequest);
 
+                System.out.println("response object : "+response);
+
                 String jsonResponse =
                         objectMapper.writeValueAsString(response);
+
+                System.out.println("json response :"+jsonResponse);
 
                 PrintWriter writer =
                         new PrintWriter(socket.getOutputStream(), true);
