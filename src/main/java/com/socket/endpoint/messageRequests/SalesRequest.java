@@ -1,7 +1,10 @@
-package com.socket.endpoint.model;
+package com.socket.endpoint.messageRequests;
 
 import com.socket.endpoint.enums.EWallet;
 import com.socket.endpoint.enums.TransactionType;
+import com.socket.endpoint.model.AcceptorDetails;
+import com.socket.endpoint.model.CardEntity;
+import com.socket.endpoint.model.MoneyEntity;
 
 public class SalesRequest {
     private String merchantId;
@@ -12,6 +15,7 @@ public class SalesRequest {
     private AcceptorDetails acceptorDetails;
     private EWallet eWallet;
     private TransactionType transactionType;
+    private String transactionId;
 
     public String getMerchantId() {
         return merchantId;
@@ -37,20 +41,20 @@ public class SalesRequest {
         this.moneyEntity = moneyEntity;
     }
 
-    public CardEntity getCardEntity() {
-        return cardEntity;
-    }
-
-    public void setCardEntity(CardEntity cardEntity) {
-        this.cardEntity = cardEntity;
-    }
-
     public String getRecurrenceFlag() {
         return recurrenceFlag;
     }
 
     public void setRecurrenceFlag(String recurrenceFlag) {
         this.recurrenceFlag = recurrenceFlag;
+    }
+
+    public CardEntity getCardEntity() {
+        return cardEntity;
+    }
+
+    public void setCardEntity(CardEntity cardEntity) {
+        this.cardEntity = cardEntity;
     }
 
     public AcceptorDetails getAcceptorDetails() {
@@ -75,5 +79,13 @@ public class SalesRequest {
 
     public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 }

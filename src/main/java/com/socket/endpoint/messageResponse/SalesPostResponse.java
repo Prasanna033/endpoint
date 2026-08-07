@@ -1,4 +1,4 @@
-package com.socket.endpoint.model;
+package com.socket.endpoint.messageResponse;
 
 public class SalesPostResponse {
     private String transactionId;
