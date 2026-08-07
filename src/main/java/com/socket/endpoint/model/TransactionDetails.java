@@ -53,8 +53,16 @@ public class TransactionDetails {
 
     @Column(name = "eWallet")
     private String eWallet;
+    @Column(name = "transaction_Id")
+    private String transactionId;
     @Column(name = "transaction_Type")
     private String transactionType;
+    @Column(name = "responseCode")
+    private String responseCode;
+    @Column(name = "responseStatus")
+    private String responseStatus;
+    @Column(name = "parent_tran_id")
+    private String parentTransactionId;
 
     public Integer getId() {
         return id;
@@ -223,4 +231,37 @@ public class TransactionDetails {
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
+
+    public String getResponseCode() {
+        return responseCode;
+    }
+
+    public void setResponseCode(String responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getResponseStatus() {
+        return responseStatus;
+    }
+
+    public void setResponseStatus(String responseStatus) {
+        this.responseStatus = responseStatus;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getParentTransactionId() {
+        return parentTransactionId;
+    }
+
+    public void setParentTransactionId(String parentTransactionId) {
+        this.parentTransactionId = parentTransactionId;
+    }
 }
+

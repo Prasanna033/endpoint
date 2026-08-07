@@ -1,8 +1,12 @@
 package com.socket.endpoint.socket;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socket.endpoint.model.SalesPostResponse;
-import com.socket.endpoint.model.SalesRequest;
+import com.socket.endpoint.messageRequests.RefundRequest;
+import com.socket.endpoint.messageRequests.VerifyRequest;
+import com.socket.endpoint.messageResponse.SalesPostResponse;
+import com.socket.endpoint.messageRequests.SalesRequest;
+import com.socket.endpoint.service.EndpointMessageTransform;
 import com.socket.endpoint.service.MessageService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -41,12 +45,26 @@ public class EndpointServer {
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
-                SalesRequest salesRequest =
-                        objectMapper.readValue(jsonRequest,
-                                SalesRequest.class);
+                JsonNode jsonNode= objectMapper.readTree(jsonRequest);
+                String transactionType=jsonNode.get("transactionType").asText();
 
-                SalesPostResponse response =
-                        messageService.processRequest(salesRequest);
+                System.out.println("Transaction Type :" +transactionType);
+
+                EndpointMessageTransform endpointMessageTransform=new EndpointMessageTransform();
+
+
+                SalesPostResponse response=new SalesPostResponse();
+                if("SALE".equalsIgnoreCase(transactionType)) {
+
+                    SalesRequest salesRequest = endpointMessageTransform.constructSaleRequest(jsonRequest, objectMapper);
+                    response = messageService.processRequest(salesRequest);
+                } else if ("REFUND".equalsIgnoreCase(transactionType)) {
+                    RefundRequest refundRequest= endpointMessageTransform.constructRefundRequest(jsonRequest,objectMapper);
+                    response= messageService.processRefundRequest(refundRequest);
+                } else if ("VERIFY".equalsIgnoreCase(transactionType)) {
+                    VerifyRequest verifyRequest = endpointMessageTransform.constructVerifyRequest(jsonRequest, objectMapper);
+                    response = messageService.processVerifyRequest(verifyRequest);
+                }
 
                 System.out.println("response object : "+response);
 

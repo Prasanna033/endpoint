@@ -23,6 +23,7 @@ public class TransactionDetailsDao {
                         "FROM TransactionDetails WHERE gatewayReference = :gatewayReference AND transactionType='SALE'",
                         TransactionDetails.class)
                 .setParameter("gatewayReference", gatewayReference)
+                .setMaxResults(1)
                 .uniqueResult();
 
         session.close();
