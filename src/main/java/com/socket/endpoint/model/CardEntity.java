@@ -3,6 +3,7 @@ package com.socket.endpoint.model;
 import com.socket.endpoint.enums.Scheme;
 
 public class CardEntity {
+
     private String cardNumber;
     private String cardExpiry;
     private String cvv;

@@ -1,22 +1,20 @@
 package com.socket.endpoint.service;
 
-import com.socket.endpoint.messageRequests.RefundRequest;
-import com.socket.endpoint.messageRequests.SalesRequest;
-import com.socket.endpoint.messageResponse.SchemeResponse;
+import com.socket.endpoint.messageresponse.SchemeResponse;
 
 public abstract class AbstractScheme {
 
     private final SchemeProcessor schemeProcessor;
 
-    public AbstractScheme(SchemeProcessor schemeProcessor) {
+    protected AbstractScheme(SchemeProcessor schemeProcessor) {
         this.schemeProcessor = schemeProcessor;
     }
 
-    public SchemeResponse processSale(SalesRequest salesRequest) {
-        return schemeProcessor.processSale(salesRequest);
+    public SchemeResponse processSale() {
+        return schemeProcessor.processSale();
     }
 
-    public SchemeResponse processRefund(RefundRequest refundRequest) {
-        return schemeProcessor.processRefund(refundRequest);
+    public SchemeResponse processRefund() {
+        return schemeProcessor.processRefund();
     }
 }
