@@ -3,16 +3,16 @@ package com.socket.endpoint.service;
 import com.socket.endpoint.dao.TransactionDetailsDao;
 import com.socket.endpoint.enums.ResponseStatus;
 import com.socket.endpoint.enums.TransactionType;
-import com.socket.endpoint.messageRequests.RefundRequest;
-import com.socket.endpoint.messageRequests.SalesRequest;
-import com.socket.endpoint.messageRequests.VerifyRequest;
-import com.socket.endpoint.messageResponse.SalesPostResponse;
+import com.socket.endpoint.messagerequest.RefundRequest;
+import com.socket.endpoint.messagerequest.SalesRequest;
+import com.socket.endpoint.messagerequest.VerifyRequest;
+import com.socket.endpoint.messageresponse.SalesPostResponse;
 import com.socket.endpoint.model.TransactionDetails;
-import com.socket.endpoint.messageResponse.SchemeResponse;
+import com.socket.endpoint.messageresponse.SchemeResponse;
 
 public class MessageService {
 
-    private TransactionDetailsDao transactionDetailsDao=new TransactionDetailsDao();
+    private final TransactionDetailsDao transactionDetailsDao=new TransactionDetailsDao();
 
     public SalesPostResponse processRequest(SalesRequest request) {
 
@@ -99,7 +99,7 @@ public class MessageService {
         }
         SchemeResponse schemeResponse=null;
         if(abstractScheme !=null){
-            schemeResponse=abstractScheme.processSale(request);
+            schemeResponse=abstractScheme.processSale();
         }
         if (schemeResponse !=null){
             transactionDetails.setResponseCode(schemeResponse.getResponseCode());

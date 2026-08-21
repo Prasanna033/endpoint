@@ -1,12 +1,10 @@
 package com.socket.endpoint.service;
 
-import com.socket.endpoint.messageRequests.SalesRequest;
-import com.socket.endpoint.messageRequests.RefundRequest;
-import com.socket.endpoint.messageResponse.SchemeResponse;
+import com.socket.endpoint.messageresponse.SchemeResponse;
 
 public class SchemeProcessor {
 
-    public SchemeResponse processSale(SalesRequest salesRequest) {
+    public SchemeResponse processSale() {
 
         SchemeResponse response = new SchemeResponse();
 
@@ -16,13 +14,8 @@ public class SchemeProcessor {
         return response;
     }
 
-    public SchemeResponse processRefund(RefundRequest refundRequest) {
+    public SchemeResponse processRefund() {
 
-        SchemeResponse response = new SchemeResponse();
-
-        response.setResponseCode("00");
-        response.setResponseStatus("APPROVED");
-
-        return response;
+        return processSale();
     }
 }

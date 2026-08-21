@@ -2,12 +2,15 @@ package com.socket.endpoint.socket;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socket.endpoint.messageRequests.RefundRequest;
-import com.socket.endpoint.messageRequests.VerifyRequest;
-import com.socket.endpoint.messageResponse.SalesPostResponse;
-import com.socket.endpoint.messageRequests.SalesRequest;
+import com.socket.endpoint.messagerequest.RefundRequest;
+import com.socket.endpoint.messagerequest.SalesRequest;
+import com.socket.endpoint.messagerequest.VerifyRequest;
+import com.socket.endpoint.messageresponse.SalesPostResponse;
 import com.socket.endpoint.service.EndpointMessageTransform;
 import com.socket.endpoint.service.MessageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -16,7 +19,11 @@ import java.net.Socket;
 
 public class EndpointServer {
 
-    private MessageService messageService;
+    private final MessageService messageService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EndpointServer.class.getName());
+
+    private volatile boolean running = true;
 
     public EndpointServer(MessageService messageService) {
         this.messageService = messageService;
@@ -24,18 +31,16 @@ public class EndpointServer {
 
     public void startServer() {
 
-        try {
+        try (ServerSocket serverSocket = new ServerSocket(5000)){
 
-            ServerSocket serverSocket = new ServerSocket(5000);
+            LOGGER.info("Endpoint Server Started...");
 
-            System.out.println("Endpoint Server Started...");
-
-            while (true) {
-                System.out.println("Waiting for Gateway...");
+            while (running) {
+                LOGGER.info("Waiting for Gateway...");
 
                 Socket socket = serverSocket.accept();
 
-                System.out.println("Gateway Connected");
+                LOGGER.info("Gateway Connected");
 
                 BufferedReader reader =
                         new BufferedReader(
@@ -48,7 +53,7 @@ public class EndpointServer {
                 JsonNode jsonNode= objectMapper.readTree(jsonRequest);
                 String transactionType=jsonNode.get("transactionType").asText();
 
-                System.out.println("Transaction Type :" +transactionType);
+                LOGGER.info("Transaction Type : {}",transactionType);
 
                 EndpointMessageTransform endpointMessageTransform=new EndpointMessageTransform();
 
@@ -66,23 +71,21 @@ public class EndpointServer {
                     response = messageService.processVerifyRequest(verifyRequest);
                 }
 
-                System.out.println("response object : "+response);
+                LOGGER.info("response object : {}",response);
 
                 String jsonResponse =
                         objectMapper.writeValueAsString(response);
 
-                System.out.println("json response :"+jsonResponse);
+                LOGGER.info("json response : {}",jsonResponse);
 
                 PrintWriter writer =
                         new PrintWriter(socket.getOutputStream(), true);
 
                 writer.println(jsonResponse);
-
-                socket.close();
         }
 
             } catch(Exception e){
-                e.printStackTrace();
+                LOGGER.error(e.getMessage());
             }
         }
     }

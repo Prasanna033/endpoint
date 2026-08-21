@@ -1,4 +1,4 @@
-package com.socket.endpoint.messageRequests;
+package com.socket.endpoint.messagerequest;
 
 import com.socket.endpoint.enums.EWallet;
 import com.socket.endpoint.enums.TransactionType;

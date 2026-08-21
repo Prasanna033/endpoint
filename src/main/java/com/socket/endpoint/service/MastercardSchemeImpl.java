@@ -1,7 +1,6 @@
 package com.socket.endpoint.service;
 
-import com.socket.endpoint.messageRequests.SalesRequest;
-import com.socket.endpoint.messageResponse.SchemeResponse;
+import com.socket.endpoint.messageresponse.SchemeResponse;
 
 public class MastercardSchemeImpl extends AbstractScheme{
 
@@ -9,8 +8,8 @@ public class MastercardSchemeImpl extends AbstractScheme{
         super(schemeProcessor);
     }
     @Override
-    public SchemeResponse processSale(SalesRequest salesRequest){
-        SchemeResponse response=super.processSale(salesRequest);
+    public SchemeResponse processSale(){
+        SchemeResponse response=super.processSale();
 
         response.setResponseStatus("MASTERCARD AUTHORISED");
         return response;

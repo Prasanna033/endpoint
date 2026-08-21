@@ -1,4 +1,4 @@
-package com.socket.endpoint.messageResponse;
+package com.socket.endpoint.messageresponse;
 
 public class SchemeResponse {
 

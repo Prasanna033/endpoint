@@ -2,9 +2,9 @@ package com.socket.endpoint.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socket.endpoint.messageRequests.RefundRequest;
-import com.socket.endpoint.messageRequests.SalesRequest;
-import com.socket.endpoint.messageRequests.VerifyRequest;
+import com.socket.endpoint.messagerequest.RefundRequest;
+import com.socket.endpoint.messagerequest.SalesRequest;
+import com.socket.endpoint.messagerequest.VerifyRequest;
 
 public class EndpointMessageTransform {
 

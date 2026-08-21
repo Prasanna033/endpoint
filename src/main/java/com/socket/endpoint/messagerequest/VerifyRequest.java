@@ -1,4 +1,4 @@
-package com.socket.endpoint.messageRequests;
+package com.socket.endpoint.messagerequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

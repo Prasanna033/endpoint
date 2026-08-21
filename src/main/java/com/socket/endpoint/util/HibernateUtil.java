@@ -5,6 +5,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
+    private HibernateUtil() {
+        /* This utility class should not be instantiated */
+    }
+
 
     private static final SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
 
