@@ -23,7 +23,7 @@ public class EndpointServer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EndpointServer.class.getName());
 
-    private volatile boolean running = true;
+    private  boolean running = true;
 
     public EndpointServer(MessageService messageService) {
         this.messageService = messageService;
